@@ -1,0 +1,22 @@
+{
+  "name": "project_with_jwt_vulnerable",
+  "version": "1.0.0",
+  "description": "Project with dependency jwt vulnerable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleunfor/project_with_jwt_vulnerable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleunfor/project_with_jwt_vulnerable/issues"
+  },
+  "homepage": "https://github.com/aleunfor/project_with_jwt_vulnerable#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
+}

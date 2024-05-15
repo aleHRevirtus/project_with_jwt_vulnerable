@@ -20,6 +20,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Extract repository name
+        id: extract_repo_name
+        run: |
+          REPO_NAME=${GITHUB_REPOSITORY#*/}
+          echo "::set-env name=REPO_NAME::$REPO_NAME"
+
       # Runs a single command using the runners shell
       - name: Pull docker StrikeOne
         run: docker pull strike1/execute-vm-test:latest
@@ -27,4 +33,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execute test
         run: |
-          docker run --rm -v $(pwd)/so_config/config.ini:/app/config.ini strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an ${{github.repository}} -tt sast -t dep_check -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn ${{github.repository}} -pb main
+          docker run --rm -v $(pwd)/so_config/config.ini:/app/config.ini strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an $REPO_NAME -tt sast -t dep_check -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn $REPO_NAME -pb main

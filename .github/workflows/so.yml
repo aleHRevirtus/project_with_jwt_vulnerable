@@ -24,7 +24,6 @@ jobs:
         id: extract_repo_name
         run: |
           REPO_NAME=${GITHUB_REPOSITORY#*/}
-          echo "::set-env name=REPO_NAME::$REPO_NAME"
 
       # Runs a single command using the runners shell
       - name: Pull docker StrikeOne

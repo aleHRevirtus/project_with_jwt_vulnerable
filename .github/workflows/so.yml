@@ -27,4 +27,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execute test
         run: |
-          docker run --rm -v $(pwd)/so_config/config.ini:/app/config.ini strikeone/execute_vm_test:latest python execute_test.py -ut $SO_TOKEN -tn test_dep_check -an $GITHUB_REPOSITORY -tt sast -t dep_check -url https://$GH_TOKEN@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn $GITHUB_REPOSITORY -pb main
+          docker run --rm -v $(pwd)/so_config/config.ini:/app/config.ini strikeone/execute-vm-test:latest python execute_test.py -ut $SO_TOKEN -tn test_dep_check -an $GITHUB_REPOSITORY -tt sast -t dep_check -url https://$GH_TOKEN@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn $GITHUB_REPOSITORY -pb main

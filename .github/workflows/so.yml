@@ -32,3 +32,4 @@ jobs:
           echo $DEP_CHECK_TEST
           if [ $DEP_CHECK_TEST -eq "error" ]; then
             exit 1
+          fi

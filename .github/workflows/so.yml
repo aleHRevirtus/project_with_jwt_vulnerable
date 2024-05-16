@@ -30,7 +30,7 @@ jobs:
       - name: Read YAML file
         id: read_yaml
         run: |
-          value=$(yq e '.ingress.host' helm_chart/values-qa.yaml)
+          value=$(yq e '.ingress.host' ./helm_chart/values-qa.yaml)
           echo 'The domain is $value'
           export DOMAIN=$value
 

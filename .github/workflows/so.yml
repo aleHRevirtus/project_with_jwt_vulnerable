@@ -30,9 +30,8 @@ jobs:
       - name: Read YAML file
         id: read_yaml
         run: |
-          value=$(yq e '.ingress.host' ./helm_chart/values-qa.yaml)
-          echo 'The domain is $value'
-          export DOMAIN=$value
+          export DOMAIN=$(yq e '.ingress.host' helm_chart/values-qa.yaml)
+          echo 'The domain is $DOMAIN'
 
       # Runs a set of commands using the runners shell
       - name: Execute test

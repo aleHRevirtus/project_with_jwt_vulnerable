@@ -24,6 +24,9 @@ jobs:
       - name: Pull docker StrikeOne
         run: docker pull strike1/execute-vm-test:latest
 
+      - name: echo
+        run: echo homa mundo
+
       # Runs a set of commands using the runners shell
       - name: Execute Dependency Check Test
         run: |

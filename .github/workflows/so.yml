@@ -24,21 +24,12 @@ jobs:
       - name: Pull docker StrikeOne
         run: docker pull strike1/execute-vm-test:latest
 
-      - name: Install yq
-        run: sudo snap install yq
-
-      - name: Read YAML file
-        id: read_yaml
-        run: |
-          DOMAIN=$(yq e '.ingress.host' helm_chart/values-qa.yaml)
-          echo "::set-output name=domain::$DOMAIN"
-
       # Runs a set of commands using the runners shell
       - name: Execute Dependency Check Test
         run: |
           export REPO_NAME=${GITHUB_REPOSITORY#*/}
           echo "$REPO_NAME"
-          export DEP_CHECK_TEST=$(docker run --rm strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an "$REPO_NAME" -tt sast -t dep_check -d ${{ steps.read_yaml.outputs.domain }} -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn "$REPO_NAME" -pb main)
+          export DEP_CHECK_TEST=$(docker run --rm strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an "$REPO_NAME" -tt sast -t dep_check -d https://strikeone.io -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn "$REPO_NAME" -pb main)
           echo "$DEP_CHECK_TEST"
           if echo "$DEP_CHECK_TEST" | grep -iq "Error"; then
             echo "[SH] Error al ejecutar test..."

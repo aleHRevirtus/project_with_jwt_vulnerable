@@ -32,7 +32,7 @@ jobs:
         run: |
           export REPO_NAME=${GITHUB_REPOSITORY#*/}
           echo "$REPO_NAME"
-          export DEP_CHECK_TEST=$(docker run --rm strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an "$REPO_NAME" -tt sast -t dep_check -d https://strikeone.io -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn "$REPO_NAME" -pb main)
+          export DEP_CHECK_TEST=$(docker run --rm strike1/execute-vm-test:latest python execute_test.py -ut ${{secrets.SO_TOKEN}} -tn test_dep_check -an "asset example" -tt sast -t dep_check -d https://docs.strikeone.io -url https://${{secrets.GH_TOKEN}}@github.com/aleHRevirtus/project_with_jwt_vulnerable.git -pn "$REPO_NAME" -pb main)
           echo "$DEP_CHECK_TEST"
           if echo "$DEP_CHECK_TEST" | grep -iq "Error"; then
             echo "[SH] Error al ejecutar test..."
